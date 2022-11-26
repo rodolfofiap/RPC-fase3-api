@@ -9,12 +9,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
-public class AssistanceServiceTeste {
+public class AssistanceServiceTest {
 
     @Mock
     private AssistanceRepository assistanceRepository;
@@ -30,9 +29,9 @@ public class AssistanceServiceTeste {
     @Test
     public void list_success(){
 
-        Assistance assistance1 = new Assistance();
-        Assistance assistance3 = new Assistance();
-        Assistance assistance2 = new Assistance();
+        Assistance assistance1 = new Assistance(1L, "Mock Assistance 1", "Description 1");
+        Assistance assistance3 = new Assistance(3L, "Mock Assistance 3", "Description 3");
+        Assistance assistance2 = new Assistance(2L, "Mock Assistance 2", "Description 2");
 
         when(assistanceRepository.findAll()).thenReturn(List.of(assistance1, assistance2, assistance3));
 
