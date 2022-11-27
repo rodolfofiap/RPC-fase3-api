@@ -1,5 +1,7 @@
 package RPC.com.fiap.abc.fase3.api.service;
 
+import RPC.com.fiap.abc.fase3.api.handler.exception.MaxAssistsExcepition;
+import RPC.com.fiap.abc.fase3.api.handler.exception.MinimumAssistisRequiredExceptions;
 import RPC.com.fiap.abc.fase3.api.model.Assistance;
 import RPC.com.fiap.abc.fase3.api.model.Order;
 import RPC.com.fiap.abc.fase3.api.repository.AssistanceRepository;
@@ -46,7 +48,7 @@ public class OrderServiceTest {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
 
-        Assertions.assertThrows(Exception.class, () -> orderService.saveOrder(newOrder, List.of()));
+        Assertions.assertThrows(MinimumAssistisRequiredExceptions.class, () -> orderService.saveOrder(newOrder, List.of()));
         verify(orderRepository, times(0)).save(newOrder);
     }
 
@@ -55,7 +57,7 @@ public class OrderServiceTest {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
 
-        Assertions.assertThrows(Exception.class, () -> orderService.saveOrder(newOrder, generate_mocks_ids(20)));
+        Assertions.assertThrows(MaxAssistsExcepition.class, () -> orderService.saveOrder(newOrder, generate_mocks_ids(20)));
         verify(orderRepository, times(0)).save(newOrder);
     }
 

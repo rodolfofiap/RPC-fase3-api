@@ -1,5 +1,7 @@
 package RPC.com.fiap.abc.fase3.api.service.impl;
 
+import RPC.com.fiap.abc.fase3.api.handler.exception.MaxAssistsExcepition;
+import RPC.com.fiap.abc.fase3.api.handler.exception.MinimumAssistisRequiredExceptions;
 import RPC.com.fiap.abc.fase3.api.model.Assistance;
 import RPC.com.fiap.abc.fase3.api.model.Order;
 import RPC.com.fiap.abc.fase3.api.repository.AssistanceRepository;
@@ -37,9 +39,9 @@ public class OrderServiceImpl implements OrderService {
         order.setAssists(assistances);
 
         if(!order.hasMinAssists()){
-            throw new Exception();
+            throw new MinimumAssistisRequiredExceptions("Invalid Assists","Ncessario no minimo uma assistencia");
         }else if (order.execeedsMaxAssists()) {
-            throw new Exception();
+            throw new MaxAssistsExcepition("Invalid Assists","Numero max eh 15");
         }
         orderRepository.save(order);
         }
